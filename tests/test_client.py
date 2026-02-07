@@ -80,7 +80,9 @@ async def test_send_presence_serializes_type_field(
             },
         )
 
-    httpx_mock.add_callback(callback, method="POST", url="http://test-api/send/presence")
+    httpx_mock.add_callback(
+        callback, method="POST", url="http://test-api/send/presence"
+    )
     response = await client.send_presence(SendPresenceRequest(type="available"))
     assert response.code == "200"
     assert captured["json"] == {"type": "available"}
@@ -149,7 +151,9 @@ async def test_send_image_rejects_missing_binary_and_url(client: GoWaClient) -> 
 
 
 @pytest.mark.asyncio
-async def test_send_image_with_url_only(client: GoWaClient, httpx_mock: HTTPXMock) -> None:
+async def test_send_image_with_url_only(
+    client: GoWaClient, httpx_mock: HTTPXMock
+) -> None:
     captured: dict[str, object] = {}
 
     def callback(request: httpx.Request) -> httpx.Response:

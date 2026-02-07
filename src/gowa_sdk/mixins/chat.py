@@ -23,7 +23,9 @@ class ChatMixin(GoWaClientProtocol):
     ) -> ApiResponse[dict]:
         response = await self._get(
             "/chats",
-            params=params.model_dump(mode="json", exclude_none=True) if params else None,
+            params=params.model_dump(mode="json", exclude_none=True)
+            if params
+            else None,
             device_id=device_id,
         )
         return ApiResponse[dict].model_validate_json(response.content)
@@ -37,7 +39,9 @@ class ChatMixin(GoWaClientProtocol):
     ) -> ApiResponse[dict]:
         response = await self._get(
             f"/chat/{chat_jid}/messages",
-            params=params.model_dump(mode="json", exclude_none=True) if params else None,
+            params=params.model_dump(mode="json", exclude_none=True)
+            if params
+            else None,
             device_id=device_id,
         )
         return ApiResponse[dict].model_validate_json(response.content)
